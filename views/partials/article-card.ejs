@@ -1,0 +1,25 @@
+<article class="article-card">
+  <div class="card-art art-<%= (article.id % 4)+1 %>">
+    <span class="art-glyph">
+      <%= ['↗','◈','↗','◎'][article.id%4] %>
+    </span>
+    <span class="art-label">
+      <%=article.category%>
+    </span>
+  </div>
+  <div class="card-content">
+    <div class="eyebrow">
+      <%=article.category%> <span>·</span> <%=article.published_at?new Date(article.published_at+'Z').toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'}):''%>
+    </div>
+    <h3>
+      <a href="/articles/<%=article.slug%>">
+        <%=article.title%>
+      </a>
+    </h3>
+    <p>
+      <%=article.excerpt%>
+    </p>
+    <a href="/articles/<%=article.slug%>" class="text-link">Read article <span>↗</span>
+    </a>
+  </div>
+</article>

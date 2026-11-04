@@ -1,0 +1,71 @@
+<%-include('partials/admin-head')%>
+<div class="admin-top">
+  <div>
+    <div class="eyebrow accent-eyebrow">EMAIL EDITION</div>
+    <h1>Newsletters<span class="period">.</span>
+    </h1>
+    <p>Create a weekly campaign and deliver it to opted-in paid subscribers.</p>
+  </div>
+</div>
+<div class="campaign-grid">
+  <div class="panel">
+    <h2>Compose a campaign</h2>
+    <form class="form-stack" action="/admin/campaigns" method="post">
+      <input type="hidden" name="_csrf" value="<%=csrf%>">
+      <label>Email subject<input name="subject" required minlength="5" placeholder="THE WEEKLY | What markets missed">
+      </label>
+      <label>Introductory letter<textarea name="intro" required minlength="10" rows="6" placeholder="A few thoughts on this week's markets...">
+      </textarea>
+    </label>
+    <label>Feature a published article<select name="article_id">
+      <option value="">Link to article archive</option>
+      <%articles.forEach(a=>{%>
+      <option value="<%=a.id%>">
+        <%=a.title%>
+      </option>
+      <%})%>
+    </select>
+  </label>
+  <button class="btn btn-dark btn-wide">Save campaign draft ↗</button>
+</form>
+<p class="helper">Configure SMTP in .env to send. Scheduled delivery can be enabled after testing.</p>
+</div>
+<div class="panel">
+  <h2>Campaign history</h2>
+  <div class="campaign-list">
+    <%if(!campaigns.length){%>
+    <p>No campaigns yet. Create your first draft.</p>
+    <%}%>
+    <%campaigns.forEach(c=>{%>
+    <div class="campaign-item">
+      <div class="campaign-item-head">
+        <strong>
+          <%=c.subject%>
+        </strong>
+        <span class="status <%=c.status==='sent'?'published':'draft'%>">
+          <%=c.status%>
+        </span>
+      </div>
+      <p>
+        <%=c.intro.slice(0,130)%>
+        <%=c.intro.length>130?'…':''%>
+      </p>
+      <small>
+        <%=c.article_title||'General digest'%> · <%=c.created_at.slice(0,10)%>
+      </small>
+      <div class="campaign-actions">
+        <span>
+          <%=c.successful%> sent · <%=c.failed%> failed</span>
+          <%if(c.status!=='sent'&&c.status!=='sending'){%>
+          <form method="post" action="/admin/campaigns/<%=c.id%>/send" onsubmit="return confirm('Send to all opted-in paid subscribers now?')">
+            <input type="hidden" name="_csrf" value="<%=csrf%>">
+            <button class="btn btn-outline btn-small">Send now ↗</button>
+          </form>
+          <%}%>
+        </div>
+      </div>
+      <%})%>
+    </div>
+  </div>
+</div>
+<%-include('partials/admin-foot')%>

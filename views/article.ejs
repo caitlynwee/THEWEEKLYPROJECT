@@ -1,0 +1,59 @@
+<%-include('partials/head')%>
+<main>
+  <section class="article-hero container">
+    <div class="eyebrow accent-eyebrow">
+      <%=article.category%> / THE WEEKLY</div>
+      <h1>
+        <%=article.title%>
+      </h1>
+      <p class="article-deck">
+        <%=article.excerpt%>
+      </p>
+      <div class="article-author">
+        <span class="avatar">W</span>
+        <span>By <strong>
+          <%=article.author%>
+        </strong>
+        <br>
+        <small>
+          <%=new Date((article.published_at||article.created_at)+'Z').toLocaleDateString('en-SG',{day:'numeric',month:'long',year:'numeric'})%> · Members' analysis</small>
+        </span>
+      </div>
+    </section>
+    <div class="article-cover art-<%=article.id%4+1%>">
+      <div class="container">
+        <span>THE WEEKLY / FIELD NOTES</span>
+        <strong>W.</strong>
+        <span>INSIGHT OVER NOISE ↗</span>
+      </div>
+    </div>
+    <div class="article-body-wrap">
+      <div class="article-prose">
+        <%if(preview){%>
+        <p class="article-first">
+          <%=article.excerpt%>
+        </p>
+        <div class="preview-text">The full analysis explores the underlying arguments, important market signals and the alternative perspectives that get lost in the daily news cycle.</div>
+        <div class="paywall">
+          <div class="lock-icon">✳</div>
+          <div class="eyebrow accent-eyebrow">MEMBERS ONLY</div>
+          <h2>There’s more to the story.</h2>
+          <p>You're reading a preview. Sign in and become a member to read the full article, access the archive and receive our weekly letters.</p>
+          <div class="paywall-actions">
+            <a href="<%=user?'/pricing':'/register'%>" class="btn btn-dark">Unlock the full article ↗</a>
+            <%if(!user){%>
+            <a href="/login?next=<%=encodeURIComponent('/articles/'+article.slug)%>" class="text-link">Already a member? Log in</a>
+            <%}%>
+          </div>
+        </div>
+        <%}else{%>
+        <%-html(article.body)%>
+        <div class="article-end">THE WEEKLY · Independent thinking for independent minds.</div>
+        <%}%>
+      </div>
+    </div>
+    <section class="container bottom-back">
+      <a href="/articles" class="text-link">← Back to the archive</a>
+    </section>
+  </main>
+  <%-include('partials/foot')%>

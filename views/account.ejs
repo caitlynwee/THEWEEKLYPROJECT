@@ -1,0 +1,50 @@
+<%-include('partials/head')%>
+<main class="container inner-page account-page">
+  <div class="eyebrow accent-eyebrow">READER ACCOUNT</div>
+  <h1 class="page-heading">Your <em>membership.</em>
+  </h1>
+  <div class="account-grid">
+    <div class="panel">
+      <div class="panel-heading">
+        <h2>Membership status</h2>
+        <span class="status <%=isPaid?'published':'draft'%>">
+          <%=user.role==='admin'?'Admin access':user.subscription_status%>
+        </span>
+      </div>
+      <p>
+        <strong>
+          <%=user.name%>
+        </strong>
+        <br>
+        <%=user.email%>
+      </p>
+      <p>Plan: <strong>
+        <%=user.plan||'No active plan'%>
+      </strong>
+    </p>
+    <%if(isPaid){%>
+    <p>You can read the full archive and receive weekly newsletters.</p>
+    <%}else{%>
+    <p>Choose a membership to unlock full articles and weekly emails.</p>
+    <a href="/pricing" class="btn btn-dark">See membership options ↗</a>
+    <%}%>
+    <%if(user.stripe_customer_id){%>
+    <form method="post" action="/billing/portal">
+      <input type="hidden" name="_csrf" value="<%=csrf%>">
+      <button class="btn btn-outline">Manage billing & invoices ↗</button>
+    </form>
+    <%}%>
+  </div>
+  <div class="panel">
+    <h2>Email preferences</h2>
+    <p>Choose whether to receive the weekly editorial digest. Unsubscribing from emails does not cancel paid access.</p>
+    <form method="post" action="/account/preferences">
+      <input type="hidden" name="_csrf" value="<%=csrf%>">
+      <label class="checkline">
+        <input type="checkbox" name="email_opt_in" <%=user.email_opt_in?'checked':''%>> Email me the weekly newsletter</label>
+        <button class="btn btn-dark">Save preferences</button>
+      </form>
+    </div>
+  </div>
+</main>
+<%-include('partials/foot')%>

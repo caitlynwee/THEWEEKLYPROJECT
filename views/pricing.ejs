@@ -1,0 +1,70 @@
+<%-include('partials/head')%>
+<main class="pricing-page">
+  <section class="container pricing-intro">
+    <div class="eyebrow accent-eyebrow">MEMBERSHIP</div>
+    <h1>Clear thinking.<br>
+      <em>A little less noise.</em>
+    </h1>
+    <p>Unfiltered market analysis from an independent voice with more than four decades of experience in global finance.</p>
+  </section>
+  <section class="container plan-grid">
+    <div class="plan-card">
+      <div class="eyebrow">FLEXIBLE ACCESS</div>
+      <h2>Monthly</h2>
+      <div class="plan-price">
+        <%=displayMonthly%>
+        <span> / month</span>
+      </div>
+      <p>All the insight, month by month.</p>
+      <ul>
+        <li>Full access to members-only articles</li>
+        <li>Weekly newsletter delivered by email</li>
+        <li>Access to the complete article archive</li>
+        <li>Manage or cancel in Stripe's portal</li>
+      </ul>
+      <%if(user&&isPaid){%>
+      <a href="/account" class="btn btn-outline btn-wide">View membership</a>
+      <%}else if(user){%>
+      <form method="post" action="/billing/checkout">
+        <input type="hidden" name="_csrf" value="<%=csrf%>">
+        <input type="hidden" name="plan" value="monthly">
+        <button type="submit"class="btn btn-dark btn-wide">Choose monthly ↗</button>
+      </form>
+      <%}else{%>
+      <a href="/register" class="btn btn-dark btn-wide">Choose monthly ↗</a>
+      <%}%>
+    </div>
+    <div class="plan-card highlighted">
+      <div class="recommended">BEST FOR COMMITTED READERS</div>
+      <div class="eyebrow">THE LONG VIEW</div>
+      <h2>Annual</h2>
+      <div class="plan-price">
+        <%=displayAnnual%>
+        <span> / year</span>
+      </div>
+      <p>Commit to the long view.</p>
+      <ul>
+        <li>Everything in the monthly membership</li>
+        <li>One annual payment instead of twelve</li>
+        <li>Uninterrupted access for a full year</li>
+        <li>Manage or cancel in Stripe's portal</li>
+      </ul>
+      <%if(user&&isPaid){%>
+      <a href="/account" class="btn btn-outline btn-wide">View membership</a>
+      <%}else if(user){%>
+      <form method="post" action="/billing/checkout">
+        <input type="hidden" name="_csrf" value="<%=csrf%>">
+        <input type="hidden" name="plan" value="annual">
+        <button type="submit" class="btn btn-accent btn-wide">Choose annual ↗</button>
+      </form>
+      <%}else{%>
+      <a href="/register" class="btn btn-accent btn-wide">Choose annual ↗</a>
+      <%}%>
+    </div>
+  </section>
+  <p class="pricing-note">Displayed prices are configurable examples. Final billing, applicable taxes and payment details appear in Stripe Checkout. <%if(!stripeReady){%>
+    <strong>Demo mode: Stripe keys and Price IDs are not yet configured.</strong>
+    <%}%>
+  </p>
+</main>
+<%-include('partials/foot')%>

@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log*
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+storage
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+server-backup.js
+coverage
+.DS_Store

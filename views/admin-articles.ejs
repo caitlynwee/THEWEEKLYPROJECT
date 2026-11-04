@@ -1,0 +1,55 @@
+<%-include('partials/admin-head')%>
+<div class="admin-top">
+  <div>
+    <div class="eyebrow accent-eyebrow">CONTENT LIBRARY</div>
+    <h1>Articles<span class="period">.</span>
+    </h1>
+    <p>Create, refine and publish your commentary.</p>
+  </div>
+  <a href="/admin/articles/new" class="btn btn-dark">+ New article</a>
+</div>
+<div class="admin-table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Updated</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%articles.forEach(a=>{%>
+      <tr>
+        <td>
+          <strong>
+            <%=a.title%>
+          </strong>
+          <small>/articles/<%=a.slug%>
+          </small>
+        </td>
+        <td>
+          <%=a.category%>
+        </td>
+        <td>
+          <span class="status <%=a.status%>">
+            <%=a.status%>
+          </span>
+        </td>
+        <td>
+          <%=a.updated_at.slice(0,10)%>
+        </td>
+        <td>
+          <a href="/admin/articles/<%=a.id%>/edit">Edit</a>
+          <form class="inline-form" action="/admin/articles/<%=a.id%>/delete" method="post" data-confirm="Delete article permanently?">
+            <input type="hidden" name="_csrf" value="<%=csrf%>">
+            <button class="danger-link">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+</div>
+<%-include('partials/admin-foot')%>

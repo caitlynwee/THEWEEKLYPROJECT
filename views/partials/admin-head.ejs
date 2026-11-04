@@ -1,0 +1,17 @@
+<%-include('head')%>
+<script src="/admin.js" defer>
+</script>
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="admin-heading">EDITORIAL STUDIO <span>●</span>
+    </div>
+    <a class="<%=path==='/admin'?'current':''%>" href="/admin">▦ &nbsp; Overview</a>
+    <a class="<%=path.startsWith('/admin/articles')?'current':''%>" href="/admin/articles">▤ &nbsp; Articles</a>
+    <a class="<%=path.startsWith('/admin/subscribers')?'current':''%>" href="/admin/subscribers">♧ &nbsp; Subscribers</a>
+    <a class="<%=path.startsWith('/admin/campaigns')?'current':''%>" href="/admin/campaigns">✉ &nbsp; Newsletters</a>
+    <div class="admin-bottom">
+      <a href="/" target="_blank" rel="noopener">↗ &nbsp; View public site</a>
+      <div>THE WEEKLY / ADMIN</div>
+    </div>
+  </aside>
+  <div class="admin-main">

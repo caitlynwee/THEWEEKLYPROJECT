@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="THE WEEKLY — Independent market commentary with a global perspective.">
+    <title>
+      <%= title %> · THE WEEKLY</title>
+      <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+      <header class="site-header">
+        <div class="container nav">
+          <a href="/" class="logo">
+            <span class="logo-mark">W<span>.</span>
+          </span>
+          <span>THE WEEKLY</span>
+        </a>
+        <nav class="nav-links">
+          <a href="/articles" class="<%= path.startsWith('/articles')?'active':'' %>">Articles</a>
+          <a href="/about">Our perspective</a>
+          <a href="/pricing">Membership</a>
+        </nav>
+        <div class="nav-actions">
+          <% if(user){ %>
+          <a href="<%=user.role==='admin'?'/admin':'/account'%>" class="subtle-link">
+            <%=user.role==='admin'?'Dashboard':'My account'%>
+          </a>
+          <form method="post" action="/logout">
+            <input type="hidden" name="_csrf" value="<%=csrf%>">
+            <button class="btn btn-outline btn-small">Log out</button>
+          </form>
+          <% } else { %>
+          <a href="/login" class="subtle-link">Log in</a>
+          <a href="/register" class="btn btn-dark btn-small">Get access ↗</a>
+          <% } %>
+        </div>
+      </div>
+    </header>
+    <% if(flash){ %>
+    <div class="flash container">
+      <%=flash%>
+    </div>
+    <% } %>

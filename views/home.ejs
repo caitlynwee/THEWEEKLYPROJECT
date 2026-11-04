@@ -1,0 +1,97 @@
+<%-include('partials/head')%>
+<main>
+  <section class="hero">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <div class="hero-label">
+          <span class="green-dot">
+          </span> THE INDEPENDENT MARKET LETTER</div>
+          <h1>Markets move.<br>
+            <em>We question why.</em>
+          </h1>
+          <p>Unfiltered perspective on global markets, currencies and the forces shaping your financial world. Four decades of market experience. Zero interest in following the crowd.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-accent" href="/pricing">Become a member <span>↗</span>
+            </a>
+            <a class="btn btn-light-outline" href="/articles">Explore articles</a>
+          </div>
+          <div class="hero-meta">
+            <span>
+              <strong>40+</strong> years of perspective</span>
+              <span class="meta-divider">
+              </span>
+              <span>
+                <strong>Weekly</strong> editorial insights</span>
+                <span class="meta-divider">
+                </span>
+                <span>
+                  <strong>Global</strong> outlook</span>
+                </div>
+              </div>
+              <div class="hero-visual">
+                <div class="graphic-label">THE BIGGER PICTURE <span> / 2026</span>
+                </div>
+                <div class="graph-lines">
+                  <svg viewBox="0 0 480 360" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M0 280 L70 255 L125 286 L170 198 L210 230 L258 155 L304 182 L354 106 L399 131 L480 26" fill="none" stroke="#d2e995" stroke-width="4"/>
+                    <path d="M0 280 L70 255 L125 286 L170 198 L210 230 L258 155 L304 182 L354 106 L399 131 L480 26 L480 360 L0 360 Z" fill="url(#fade)"/>
+                    <defs>
+                      <linearGradient id="fade" x1="0" x2="0" y1="0" y2="1">
+                        <stop stop-color="#d2e995" stop-opacity=".18"/>
+                        <stop offset="1" stop-color="#d2e995" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                <div class="graphic-footer">
+                  <span>THINK BEYOND THE HEADLINES</span>
+                  <span>↗</span>
+                </div>
+                <div class="graphic-circle">W.</div>
+              </div>
+            </div>
+          </section>
+          <section class="ticker">
+            <div class="container ticker-inner">
+              <span>INDEPENDENT BY DESIGN</span>
+              <span>✳</span>
+              <span>INSIGHT OVER NOISE</span>
+              <span>✳</span>
+              <span>GLOBAL MARKETS, CLEAR THINKING</span>
+              <span>✳</span>
+              <span>NO SACRED COWS</span>
+            </div>
+          </section>
+          <section class="section container">
+            <div class="section-top">
+              <div>
+                <div class="eyebrow accent-eyebrow">THE READING ROOM</div>
+                <h2>Fresh perspectives.<br>
+                  <em>Uncomfortable questions.</em>
+                </h2>
+              </div>
+              <a href="/articles" class="text-link">View all articles ↗</a>
+            </div>
+            <div class="article-grid">
+              <% articles.forEach(article=>{ %>
+              <%-include('partials/article-card',{article})%>
+              <% }) %>
+            </div>
+          </section>
+          <section class="membership-banner">
+            <div class="container membership-inner">
+              <div>
+                <div class="eyebrow">THE WEEKLY MEMBERSHIP</div>
+                <h2>Get the thinking<br>
+                  <em>behind the numbers.</em>
+                </h2>
+                <p>Join members who want a perspective worth reading — not another headline to scroll past.</p>
+              </div>
+              <div>
+                <a class="btn btn-accent" href="/pricing">Explore membership ↗</a>
+                <div class="tiny">Monthly or annual. Cancel through your account.</div>
+              </div>
+            </div>
+          </section>
+        </main>
+        <%-include('partials/foot')%>

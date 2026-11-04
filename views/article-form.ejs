@@ -1,0 +1,45 @@
+<%-include('partials/admin-head')%>
+<div class="admin-top">
+  <div>
+    <div class="eyebrow accent-eyebrow">EDITORIAL WORKSPACE</div>
+    <h1>
+      <%=article?'Edit article':'New article'%>
+      <span class="period">.</span>
+    </h1>
+    <p>Write in Markdown. Save as draft or publish immediately.</p>
+  </div>
+  <a href="/admin/articles" class="btn btn-outline">← Back to articles</a>
+</div>
+<form method="post" action="/admin/articles/save" class="editor-grid">
+  <input type="hidden" name="_csrf" value="<%=csrf%>">
+  <input type="hidden" name="id" value="<%=article?.id||''%>">
+  <div class="panel editor-main">
+    <label>Headline<input required minlength="4" name="title" value="<%=article?.title||''%>" placeholder="A thought-provoking headline">
+    </label>
+    <label>Excerpt / public preview<textarea name="excerpt" rows="3" required minlength="15" placeholder="What should a prospective reader know before the paywall?">
+      <%=article?.excerpt||''%>
+    </textarea>
+  </label>
+  <label>Article body (Markdown)<textarea name="body" rows="17" required minlength="30" placeholder="## Your argument\n\nWrite your full article here...">
+    <%=article?.body||''%>
+  </textarea>
+</label>
+</div>
+<aside class="panel editor-settings">
+  <h2>Publishing</h2>
+  <label>Status<select name="status">
+    <option value="draft" <%=article?.status!=='published'?'selected':''%>>Draft</option>
+    <option value="published" <%=article?.status==='published'?'selected':''%>>Published</option>
+  </select>
+</label>
+<label>Category<input name="category" value="<%=article?.category||'Markets'%>">
+</label>
+<label>Author<input name="author" value="<%=article?.author||'The Weekly'%>">
+</label>
+<label class="checkline">
+  <input type="checkbox" name="featured" <%=article?.featured?'checked':''%>> Feature on homepage</label>
+  <button class="btn btn-dark btn-wide">Save article ↗</button>
+  <p class="helper">Only published articles are visible on the public website. The body remains behind the paywall.</p>
+</aside>
+</form>
+<%-include('partials/admin-foot')%>

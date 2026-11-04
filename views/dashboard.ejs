@@ -1,0 +1,94 @@
+<%-include('partials/admin-head')%>
+<div class="admin-top">
+  <div>
+    <div class="eyebrow accent-eyebrow">GOOD DAY, EDITOR</div>
+    <h1>Editorial overview<span class="period">.</span>
+    </h1>
+    <p>A snapshot of your publication and its people.</p>
+  </div>
+  <a class="btn btn-dark" href="/admin/articles/new">+ New article</a>
+</div>
+<div class="stat-grid">
+  <div class="stat">
+    <span>Published articles</span>
+    <strong>
+      <%=stats.articles%>
+    </strong>
+    <small>Available to readers</small>
+  </div>
+  <div class="stat">
+    <span>Draft articles</span>
+    <strong>
+      <%=stats.drafts%>
+    </strong>
+    <small>In your workspace</small>
+  </div>
+  <div class="stat">
+    <span>Paid subscribers</span>
+    <strong>
+      <%=stats.subscribers%>
+    </strong>
+    <small>Active or trialing</small>
+  </div>
+  <div class="stat">
+    <span>Registered readers</span>
+    <strong>
+      <%=stats.readers%>
+    </strong>
+    <small>Total reader accounts</small>
+  </div>
+</div>
+<div class="admin-split">
+  <div class="admin-table-card">
+    <div class="table-title">
+      <h2>Recent articles</h2>
+      <a href="/admin/articles">View all ↗</a>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Article</th>
+          <th>Status</th>
+          <th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%articles.forEach(a=>{%>
+        <tr>
+          <td>
+            <strong>
+              <%=a.title%>
+            </strong>
+            <small>
+              <%=a.category%>
+            </small>
+          </td>
+          <td>
+            <span class="status <%=a.status%>">
+              <%=a.status%>
+            </span>
+          </td>
+          <td>
+            <a href="/admin/articles/<%=a.id%>/edit">Edit ↗</a>
+          </td>
+        </tr>
+        <%})%>
+      </tbody>
+    </table>
+  </div>
+  <div class="admin-side-card">
+    <div class="eyebrow accent-eyebrow">PUBLISHING</div>
+    <h2>Keep the ideas flowing.</h2>
+    <p>Draft a market analysis, publish it to the reading room, then turn it into an email campaign.</p>
+    <a href="/admin/articles/new" class="btn btn-dark btn-wide">Write an article ↗</a>
+    <a href="/admin/campaigns" class="btn btn-outline btn-wide">Manage newsletters ↗</a>
+    <div class="sidebar-rule">
+    </div>
+    <small>
+      <strong>
+        <%=stats.sent%>
+      </strong> newsletter campaigns marked as sent</small>
+    </div>
+  </div>
+  <%-include('partials/admin-foot')%>

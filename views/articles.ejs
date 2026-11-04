@@ -1,0 +1,21 @@
+<%-include('partials/head')%>
+<main class="container inner-page">
+  <div class="eyebrow accent-eyebrow">THE WEEKLY ARCHIVE</div>
+  <h1 class="page-heading">Ideas worth <em>examining.</em>
+  </h1>
+  <p class="lead">Markets, money, macro and the stories behind the stories.</p>
+  <div class="filters">
+    <a href="/articles" class="chip <%=!category?'selected':''%>">All articles</a>
+    <%categories.forEach(c=>{ %>
+    <a class="chip <%=category===c?'selected':''%>" href="/articles?category=<%=encodeURIComponent(c)%>">
+      <%=c%>
+    </a>
+    <% }) %>
+  </div>
+  <div class="article-grid">
+    <%articles.forEach(article=>{ %>
+    <%-include('partials/article-card',{article})%>
+    <% }) %>
+  </div>
+</main>
+<%-include('partials/foot')%>

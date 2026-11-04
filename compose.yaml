@@ -1,0 +1,21 @@
+
+services:
+  web:
+    build: .
+    container_name: the-weekly
+
+    ports:
+      - "127.0.0.1:3000:3000"
+
+    env_file:
+      - .env
+
+    environment:
+      NODE_ENV: development
+      PORT: "3000"
+      APP_URL: http://localhost:3000
+
+    volumes:
+      - ./storage:/app/storage
+
+    restart: unless-stopped

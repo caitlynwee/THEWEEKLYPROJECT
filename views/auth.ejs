@@ -1,0 +1,37 @@
+<%-include('partials/head')%>
+<main class="auth-page">
+  <div class="auth-panel">
+    <div class="eyebrow accent-eyebrow">THE WEEKLY</div>
+    <h1>
+      <%=mode==='register'?'Join the conversation.':'Welcome back.'%>
+    </h1>
+    <p>
+      <%=mode==='register'?'Create your free account, then choose a monthly or annual membership.':'Sign in to continue your reading.'%>
+    </p>
+    <form method="post" action="/<%=mode==='register'?'register':'login'%>" class="form-stack">
+      <input type="hidden" name="_csrf" value="<%=csrf%>">
+      <input type="hidden" name="next" value="<%=next%>">
+      <%if(mode==='register'){%>
+      <label>Your name<input name="name" minlength="2" required autocomplete="name" placeholder="Jane Reader">
+      </label>
+      <%}%>
+      <label>Email address<input name="email" type="email" required autocomplete="email" placeholder="you@example.com">
+      </label>
+      <label>Password<input name="password" type="password" required minlength="<%=mode==='register'?10:1%>" autocomplete="<%=mode==='register'?'new-password':'current-password'%>" placeholder="<%=mode==='register'?'At least 10 characters':'Your password'%>">
+      </label>
+      <button class="btn btn-dark btn-wide">
+        <%=mode==='register'?'Create account':'Sign in'%> ↗</button>
+      </form>
+      <div class="auth-switch">
+        <%if(mode==='register'){%>Already have an account? <a href="/login">Sign in</a>
+        <%}else{%>New to THE WEEKLY? <a href="/register">Create an account</a>
+        <%}%>
+      </div>
+    </div>
+    <aside class="auth-aside">
+      <div class="eyebrow">MORE THAN A HEADLINE</div>
+      <blockquote>“The market has a way of asking uncomfortable questions. We believe in asking them first.”</blockquote>
+      <div class="aside-bottom">INDEPENDENT VOICES. INFORMED PERSPECTIVES. ↗</div>
+    </aside>
+  </main>
+  <%-include('partials/foot')%>

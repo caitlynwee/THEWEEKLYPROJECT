@@ -1,0 +1,53 @@
+<%-include('partials/admin-head')%>
+<div class="admin-top">
+  <div>
+    <div class="eyebrow accent-eyebrow">COMMUNITY</div>
+    <h1>Subscribers<span class="period">.</span>
+    </h1>
+    <p>View account status and newsletter preferences. Stripe is the source of truth for payments.</p>
+  </div>
+  <a href="https://dashboard.stripe.com/test/subscriptions" target="_blank" rel="noopener" class="btn btn-outline">Stripe sandbox ↗</a>
+</div>
+<div class="admin-table-card">
+  <table>
+    <thead>
+      <tr>
+        <th>Name / email</th>
+        <th>Membership</th>
+        <th>Plan</th>
+        <th>Email updates</th>
+        <th>Joined</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%subscribers.forEach(s=>{%>
+      <tr>
+        <td>
+          <strong>
+            <%=s.name%>
+          </strong>
+          <small>
+            <%=s.email%>
+          </small>
+        </td>
+        <td>
+          <span class="status <%=['active','trialing'].includes(s.subscription_status)?'published':'draft'%>">
+            <%=s.role==='admin'?'admin':s.subscription_status%>
+          </span>
+        </td>
+        <td>
+          <%=s.plan||'—'%>
+        </td>
+        <td>
+          <%=s.email_opt_in?'Opted in':'Opted out'%>
+        </td>
+        <td>
+          <%=s.created_at.slice(0,10)%>
+        </td>
+      </tr>
+      <%})%>
+    </tbody>
+  </table>
+</div>
+<p class="helper">Subscription access changes are synchronized from verified Stripe webhooks. Account status is intentionally not editable here to prevent bypassing payment checks.</p>
+<%-include('partials/admin-foot')%>
